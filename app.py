@@ -7,7 +7,7 @@ from urllib.parse import parse_qs, urlparse
 import psycopg
 
 DATABASE_URL = os.environ["DATABASE_URL"]
-VERSION = "2026.09.02-report-headers"
+VERSION = "2026.09.02-report-headers-v2"
 
 
 def connection():
