@@ -55,7 +55,7 @@ class Handler(BaseHTTPRequestHandler):
             ).fetchall()
         elapsed_ms = (time.perf_counter() - started) * 1000
         self.send_response(200)
-        self.send_header("X-Report-Format", "summary")
+        self.send_header("X-Report-Format", "summary-v2")
         self.send_header("Content-Type", "application/json")
         encoded = json.dumps({"count": len(rows), "report_type": report_type, "latency_ms": round(elapsed_ms, 3)}).encode()
         self.send_header("Content-Length", str(len(encoded)))
