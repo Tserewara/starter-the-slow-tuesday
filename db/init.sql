@@ -7,9 +7,9 @@ CREATE TABLE reports (
 
 INSERT INTO reports (id, report_type, created_at, total_cents)
 SELECT n,
-       CASE WHEN n % 100 = 0 THEN 'reconciliation' ELSE 'daily' END,
-       now() - ((n % 30) || ' days')::interval,
+       CASE WHEN n % 300 = 0 THEN 'reconciliation' ELSE 'daily' END,
+       now() - ((n % 29) || ' days')::interval,
        1000 + (n % 50000)
-FROM generate_series(1, 600000) AS n;
+FROM generate_series(1, 5000000) AS n;
 
 ANALYZE reports;

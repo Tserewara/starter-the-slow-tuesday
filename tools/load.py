@@ -15,7 +15,10 @@ def one(_):
     return status, (time.perf_counter() - started) * 1000
 
 
-with ThreadPoolExecutor(max_workers=2) as pool:
+# One untimed request first: the container's first DNS lookup and connection
+# are not part of Tuesday's traffic.
+one(None)
+with ThreadPoolExecutor(max_workers=8) as pool:
     results = list(pool.map(one, range(40)))
 latencies = sorted(value for status, value in results if status == 200)
 p99 = latencies[max(0, int(len(latencies) * 0.99) - 1)]
